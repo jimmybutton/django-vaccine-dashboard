@@ -29,4 +29,4 @@ Contributions, issues and feature requests are welcome!
 Give a ⭐️ if this project helped you!
 
 ## License
-[The MIT License](https://github.com/jimmybutton/django-blogcomments/blob/master/LICENSE)
+[The MIT License](https://github.com/jimmybutton/django-vaccine-dashboard/blob/main/LICENSE)
