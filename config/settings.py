@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tailwind',
+    'theme',
 
     'dashboard',
 ]
@@ -128,3 +130,10 @@ STATICFILES_DIRS = (BASE_DIR / 'static',)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ENTRIES_DATAFILE = BASE_DIR / "data/country_vaccinations.csv"
+
+
+# Tailwind
+TAILWIND_APP_NAME = 'theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

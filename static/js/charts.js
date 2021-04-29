@@ -45,7 +45,6 @@ function drawLineChart(canvas) {
               position: "bottom",
             },
           },
-          responsive: true,
           maintainAspectRatio: false,
         },
       });
@@ -82,7 +81,6 @@ function drawPieChart(canvas) {
           legend: {
             position: "bottom",
           },
-          responsive: true,
           maintainAspectRatio: false,
         },
       });

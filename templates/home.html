@@ -2,16 +2,23 @@
 {% load static %}
 {% block content %}
 
-<h1>Django Dashboard</h1>
+<h1 class="text-lg font-bold">Covid-19 Vaccination Dashboard 💉</h1>
+<p class="text-gray-500">Build with Django, Chart.js, Grid.js and Tailwind</p>
 
-<h3>People vaccinated per hundred</h3>
-<div style="height: 400px; width: 500px;">
-  <canvas id="lineChart" data-url="{% url 'linechart' %}"></canvas>
-</div>
+<div class="mt-4 grid gap-4 gris-cols-1 lg:grid-cols-2">
+  <div class="bg-white sm:rounded-md shadow -mx-4 sm:mx-0 px-4 py-3">
+    <h3 class="font-medium">People vaccinated per hundred</h3>
+    <div class="mt-2 h-96">
+      <canvas id="lineChart" data-url="{% url 'linechart' %}"></canvas>
+    </div>
+  </div>
 
-<h3>Most widely used vaccine combinations</h3>
-<div style="height: 400px; width: 500px;">
-  <canvas id="pieChart" data-url="{% url 'piechart' %}"> </canvas>
+  <div class="bg-white sm:rounded-md shadow  -mx-4 sm:mx-0 px-4 py-3">
+    <h3 class="font-medium">Most widely used vaccine combinations</h3>
+    <div class="mt-2 h-96">
+      <canvas id="pieChart" data-url="{% url 'piechart' %}"></canvas>
+    </div>
+  </div>
 </div>
 
 <script
