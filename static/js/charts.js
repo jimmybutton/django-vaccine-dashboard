@@ -21,6 +21,7 @@ function drawLineChart(canvas) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data)
       new Chart(ctx, {
         type: "line",
         data: {
@@ -43,6 +44,43 @@ function drawLineChart(canvas) {
             legend: {
               position: "bottom",
             },
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+
+function drawPieChart(canvas) {
+  let url = canvas.dataset.url;
+  let ctx = canvas.getContext("2d");
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      new Chart(ctx, {
+        type: "pie",
+        data: {
+          datasets: [
+            {
+              data: Object.values(data.combinations).map((value) =>
+                (value * 100).toFixed(1)
+              ),
+              backgroundColor: COLORS,
+              label: "Most widely used vaccine combinations",
+            },
+          ],
+          labels: Object.keys(data.combinations),
+        },
+        options: {
+          legend: {
+            position: "bottom",
           },
           responsive: true,
           maintainAspectRatio: false,

@@ -6,7 +6,12 @@
 
 <h3>People vaccinated per hundred</h3>
 <div style="height: 400px; width: 500px;">
-  <canvas id="myChart" data-url="{% url 'linechart' %}"></canvas>
+  <canvas id="lineChart" data-url="{% url 'linechart' %}"></canvas>
+</div>
+
+<h3>Most widely used vaccine combinations</h3>
+<div style="height: 400px; width: 500px;">
+  <canvas id="pieChart" data-url="{% url 'piechart' %}"> </canvas>
 </div>
 
 <script
@@ -17,8 +22,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@next/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script src="{% static 'js/charts.js' %}"></script>
 <script>
-  let lineChart = document.getElementById("myChart");
+  let lineChart = document.getElementById("lineChart");
   drawLineChart(lineChart)
+  let pieChart = document.getElementById("pieChart");
+  drawPieChart(pieChart)
 </script>
 
 {% endblock %}
