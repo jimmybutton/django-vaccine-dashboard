@@ -21,7 +21,7 @@ function drawLineChart(canvas) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       new Chart(ctx, {
         type: "line",
         data: {
@@ -62,7 +62,6 @@ function drawPieChart(canvas) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
       new Chart(ctx, {
         type: "pie",
         data: {

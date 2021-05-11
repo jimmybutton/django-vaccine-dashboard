@@ -1,15 +1,21 @@
 import csv
+from io import BytesIO
+from zipfile import ZipFile
+from urllib.request import urlopen
 
 from django.core.management.base import BaseCommand, CommandError
-from dashboard.models import Entry  # new
+from dashboard.models import Entry
 from config.settings import ENTRIES_DATAFILE
 
 from ._utils import convert
 
 class Command(BaseCommand):
     help = 'Seed the database with vaccination data'
+    
+    def _clear_table(self):
+        Entry.objects.all().delete()
 
-    def handle(self, *args, **kwargs):
+    def _import_from_file(self):
         try:
             with open(ENTRIES_DATAFILE, 'r') as fp:
                 reader = csv.DictReader(fp)
@@ -29,4 +35,8 @@ class Command(BaseCommand):
         except FileNotFoundError:
             raise CommandError(f'File "{ENTRIES_DATAFILE}" does not exist')
 
+
+    def handle(self, *args, **kwargs):
+        self._clear_table()
+        self._import_from_file()
         self.stdout.write(self.style.SUCCESS('Successfully seeded database.'))

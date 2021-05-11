@@ -2,7 +2,7 @@ import datetime
 
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.db.models import Sum
+from django.db.models import Subquery, OuterRef, F, Sum
 
 from .models import Entry
 
@@ -50,3 +50,16 @@ def piechart(request):
     }
     combinations["other"] = 1 - sum(entry["total"] for entry in qs) / total_vaccines
     return JsonResponse(data={"combinations": combinations})
+
+
+def table(request):
+    last_date = Entry.objects.order_by("-date").first().date
+    qs = Entry.objects.all()
+    sq = qs.filter(country=OuterRef("country")).order_by("-date").values("id")
+    qs2 = (
+        qs.filter(date__gte=last_date - datetime.timedelta(days=5))
+        .annotate(latest=Subquery(sq[:1]))
+        .filter(id=F("latest"))
+        .order_by("-people_vaccinated_per_hundred")
+    )
+    return JsonResponse(data={"data": list(qs2.values())})
